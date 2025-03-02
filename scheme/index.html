@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Schemes for Farmers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e6f7ff, #eafaf1);
+            color: #333;
+            padding: 30px 10px;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 36px;
+            color: #2d6a4f;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .scheme-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .scheme-card {
+            background: #f9f9f9;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scheme-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            background: #f0fdf4;
+        }
+
+        .scheme-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+            animation: float 3s infinite alternate ease-in-out;
+        }
+
+        .scheme-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #2f6b3f;
+        }
+
+        .scheme-description {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .scheme-link {
+            display: inline-block;
+            padding: 10px 15px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .scheme-link:hover {
+            background: #218838;
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        @keyframes float {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🌾 Government Schemes for Farmers 🌾</h1>
+    <div class="scheme-list" id="schemeList">
+        <!-- Schemes will be injected by JS -->
+    </div>
+</div>
+
+<footer>© 2025 - Farmer Welfare Portal | Empowering Bharat's Annadatas</footer>
+
+<script>
+    const schemes = [
+        { icon: '✅', title: 'Pradhan Mantri Fasal Bima Yojana', description: 'Crop insurance for farmers to cover losses from natural calamities.', link: 'https://pmfby.gov.in' },
+        { icon: '⚙️', title: 'Soil Health Card Scheme', description: 'Regular soil health check and advice on nutrients and fertilizers.', link: 'https://www.soilhealth.dac.gov.in' },
+        { icon: '🌾', title: 'PM Krishi Sinchai Yojana', description: 'Ensures efficient water usage for agriculture.', link: 'https://pmksy.gov.in' },
+        { icon: '🚜', title: 'Kisan Credit Card', description: 'Credit facilities for farmers with flexible loans.', link: 'https://www.kisancreditcard.com' },
+        { icon: '🌿', title: 'Paramparagat Krishi Vikas Yojana', description: 'Promotes organic farming across the country.', link: 'https://pgsindia-ncof.gov.in' },
+        { icon: '🌞', title: 'Kusum Solar Yojana', description: 'Solar pumps for farmers to reduce electricity bills.', link: 'https://mnre.gov.in/solar/schemes' },
+        { icon: '🌱', title: 'National Food Security Mission', description: 'Focuses on sustainable food production.', link: 'https://nfsm.gov.in' },
+        { icon: '💧', title: 'Micro Irrigation Fund', description: 'Financial assistance for drip and sprinkler irrigation.', link: 'https://nmsa.dac.gov.in' },
+        { icon: '🐄', title: 'National Livestock Mission', description: 'Improving livestock productivity and health.', link: 'https://nlm.udyamimitra.in' },
+        { icon: '🍀', title: 'Rashtriya Krishi Vikas Yojana', description: 'Supports agricultural development plans.', link: 'https://rkvy.nic.in' },
+        { icon: '🧑‍🌾', title: 'PM Kisan Samman Nidhi', description: 'Direct income support of ₹6000 per year to farmers.', link: 'https://pmkisan.gov.in' },
+        { icon: '🐝', title: 'National Beekeeping Mission', description: 'Promotes beekeeping and honey production.', link: 'https://nbhm.gov.in' },
+        { icon: '🍚', title: 'Price Support Scheme', description: 'Assures MSP to farmers for their crops.', link: 'https://pib.gov.in' },
+        { icon: '📊', title: 'Agri Infrastructure Fund', description: 'Funding for post-harvest management infrastructure.', link: 'https://agriinfra.dac.gov.in' },
+        { icon: '🚛', title: 'Operation Greens', description: 'Focuses on Tomato, Onion, Potato (TOP) value chain.', link: 'https://www.mofpi.gov.in' },
+        { icon: '🌍', title: 'PM Matsya Sampada Yojana', description: 'Supports fisheries development and aquaculture.', link: 'https://pmmsy.dof.gov.in' },
+        { icon: '🧑‍🔬', title: 'Krishi Vigyan Kendras', description: 'Farmers training centers across districts.', link: 'https://kvk.icar.gov.in' },
+        { icon: '🪴', title: 'Mission for Integrated Horticulture', description: 'Promotes horticulture crops across India.', link: 'https://midh.gov.in' },
+        { icon: '🌽', title: 'National Bamboo Mission', description: 'Promotes bamboo cultivation and marketing.', link: 'https://nbm.nic.in' },
+        { icon: '📦', title: 'e-NAM', description: 'Online national agricultural market.', link: 'https://enam.gov.in' },
+        { icon: '🌻', title: 'Oil Palm Development Programme', description: 'Boosts oil palm cultivation.', link: 'https://nmoop.gov.in' }
+    ];
+
+    function loadSchemes() {
+        const schemeList = document.getElementById('schemeList');
+        schemeList.innerHTML = schemes.map(scheme => `
+            <div class="scheme-card">
+                <div class="scheme-icon">${scheme.icon}</div>
+                <div class="scheme-title">${scheme.title}</div>
+                <div class="scheme-description">${scheme.description}</div>
+                <a class="scheme-link" href="${scheme.link}" target="_blank">Learn More</a>
+            </div>
+        `).join('');
+    }
+
+    loadSchemes();
+</script>
+
+</body>
+</html>

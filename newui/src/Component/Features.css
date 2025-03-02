@@ -1,0 +1,141 @@
+.features-section {
+    position: relative;
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:  linear-gradient(90.9deg, rgb(3, 195, 195) 0.3%, rgb(37, 84, 112) 87.8%);  /* from-green-900 to-emerald-800 */
+    overflow: hidden;
+}
+
+
+/* Falling particles */
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    filter: blur(4px);
+    opacity: 0.6;
+}
+
+/* Features grid */
+.features-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    z-index: 2;
+    padding: 30px 0;
+}
+
+/* Feature Card - Glassmorphic */
+.feature-card {
+    width: 320px;
+    height: 350px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(16px);
+    border-radius: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.feature-card:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Animated Gradient Border */
+.feature-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, #16a34a, #22c55e, #15fa78, #22c55e);
+    z-index: -1;
+    border-radius: inherit;
+    animation: borderAnimation 6s linear infinite;
+}
+
+@keyframes borderAnimation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Icon Box */
+.icon-box {
+    width: 95px;
+    height: 95px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.icon-box img {
+    width: 50px;
+    height: 50px;
+}
+
+/* Title with yellow underline */
+.feature-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: whitesmoke;
+
+    margin-bottom: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.feature-title::after {
+    content: '';
+    width: 0;
+    height: 3px;
+    background: #d6bc52;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    transition: width 0.4s ease;
+}
+
+.feature-card:hover .feature-title::after {
+    width: 100%;
+}
+
+/* Description */
+.feature-card p {
+    color: #171516;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Button */
+.feature-card button {
+    background: linear-gradient(to right, #033d18, #04722c);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: auto;
+}
+
+.feature-card button:hover {
+    transform: translateY(-3px) scale(1.1);
+}
