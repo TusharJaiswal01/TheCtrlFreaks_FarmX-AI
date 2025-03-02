@@ -1,0 +1,97 @@
+include ./header
+
+.container(style='background: linear-gradient(to bottom, #111827, #000000); padding-top : 30px;padding-left:30px;padding-right:30px; min-height: 100vh;min-width : 100vw')
+    .row
+        .col-12
+            header(style='margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;')
+                nav
+                    a(href='/' style='margin-right: 15px; font-weight: 600; color: #007bff; text-decoration: none; font-color:white') Home
+                    if !additem
+                        a(href='/profile/additem' style='margin-right: 15px; font-weight: 600; color: #28a745; text-decoration: none;') + Add an item
+                    else
+                        a(href='/profile' style='margin-right: 15px; font-weight: 600; color: #007bff; text-decoration: none;') Profile
+                a(href='/logout' style='font-weight: 600; color: #dc3545; text-decoration: none;') Sign out
+
+    if !additem && !showBid
+        .row
+            for item in items
+                .col-md-4(style='margin-bottom: 20px')
+                    article.items(style='background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;')
+                        - let firstImg = item.images.split(',')[0]
+                        img.img-fluid(src=`/uploads/${firstImg}` style='width: 100%; height: 200px; object-fit: cover;')
+                        .p-3
+                            h5(style='font-size: 18px; margin: 0 0 10px; color: #333; font-weight: 600;')= item.name
+                            footer(style='display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: #555;')
+                                span= `${new Date(item.date).getDate()}/${new Date(item.date).getMonth()}/${new Date(item.date).getFullYear()}`
+                                if item.sold
+                                    a(href=`/profile/showbid/${item._id}` style='color: green; font-weight: 600; text-decoration: none;') Sold
+                                else if !item.sold && item.bidded
+                                    span(style='color: red; font-weight: 600; ') Not sold
+                                else if !item.bidded
+                                    span(style='color: blue; font-weight: 600;') In queue
+
+    else if showBid
+        .col-md-8(style='margin: auto; margin-top: 20px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);')
+            .itemShow
+                h4(style='margin-bottom: 20px; font-weight: 600;')= item[0].name
+                if item[0].images.match(/\,/)
+                    - let image = item[0].images.split(',')
+                    img(src=`/uploads/${image[0]}` style='width: 100%; border-radius: 5px; margin-bottom: 15px;')
+                else
+                    img(src=`/uploads/${item[0].images}` style='width: 100%; border-radius: 5px; margin-bottom: 15px;')
+
+                .info
+                    div(style='margin-bottom: 10px')
+                        p(style='margin: 0; font-weight: 600; font-color:white') Price:
+                        p= `${bid[0].price}$`
+                    div(style='margin-bottom: 10px')
+                        p(style='margin: 0; font-weight: 600;') Full name:
+                        p= user[0].fullname
+                    div(style='margin-bottom: 10px')
+                        p(style='margin: 0; font-weight: 600;') Email address:
+                        p= user[0].email
+                    div(style='margin-bottom: 0')
+                        p(style='margin: 0; font-weight: 600;') Phone number:
+                        p= user[0].address
+
+    else if additem
+        .row
+            .col-md-8(style='margin: auto')
+                form(method='post' action='/profile/additem' enctype='multipart/form-data' style='background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);')
+                    h4(style='margin-bottom: 20px; font-weight: 600;') Add New Item
+
+                    .form-group
+                        label Item Name
+                        input.form-control(type='text' name='name' required style='margin-bottom: 15px;')
+
+                    .form-group
+                        label Details
+                        textarea.form-control(name='detail' required style='margin-bottom: 15px;')
+
+                    .form-group
+                        label Price in USD
+                        input.form-control(type='number' name='price' required style='margin-bottom: 15px;')
+
+                    .form-group
+                        label Images
+                        input.form-control(type='file' name='images' multiple required style='margin-bottom: 15px;')
+
+                    .form-group
+                        label Category
+                        select.form-control(name='category' required style='margin-bottom: 15px;')
+                            option(value='') -- Select Category --
+                            for cat in categories
+                                option(value=cat._id)= cat.name
+
+                    .form-group
+                        label Bid Start After
+                        select.form-control(name='start_bid_date' required style='margin-bottom: 15px;')
+                            option(value='') -- Bid start after --
+                            option(value='1m') 1 minute
+                            option(value='1h') 1 hour
+                            option(value='1d') 1 day
+
+                    input.btn.btn-primary.form-control(type='submit' value='+ Add' style='background-color: #007bff; border: none; font-weight: 600; cursor: pointer;')
+
+                    .messages
+
